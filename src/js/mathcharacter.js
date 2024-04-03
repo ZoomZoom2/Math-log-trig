@@ -3,16 +3,17 @@ import Character from './character';
 export default class MathCharacter extends Character {
   constructor(name, type) {
     super(name, type);
+    this.distance = 1;
     this.stoned = false;
     this.attack = 100;
   }
 
-  getAttack(distance) {
-    if (distance === 0) return this.attack;
+  getAttack() {
+    if (this.distance === 0) return this.attack;
 
-    let result = this.attack - (this.attack * (10 / 100) * (distance - 1));
+    let result = this.attack - (this.attack * (10 / 100) * (this.distance - 1));
     if (this.stoned) {
-      result = Math.round(result - (Math.log2(distance) * 5));
+      result = Math.round(result - (Math.log2(this.distance) * 5));
     }
     return Math.max(0, result);
   }
